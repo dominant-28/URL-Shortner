@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Body Styling */
+      body {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        color: #333;
+      }
+
+      /* Container */
+      .form-container {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .form-container h1 {
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 2rem;
+      }
+
+      /* Input Fields */
+      .form-container label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+        color: #444;
+        text-align: left;
+      }
+
+      .form-container input {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        outline: none;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .form-container input:focus {
+        border-color: #6a11cb;
+      }
+
+      /* Submit Button */
+      .form-container button {
+        background-color: #6a11cb;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 8px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .form-container button:hover {
+        background-color: #2575fc;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 480px) {
+        .form-container {
+          padding: 20px;
+        }
+
+        .form-container h1 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>SIGN UP</h1>
+      <form action="/user" method="post">
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Enter Your Name"
+          required
+        />
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Enter Your Email"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Enter Your Password"
+          required
+        />
+
+        <button type="submit">SIGN UP</button>
+      </form>
+    </div>
+  </body>
+</html>

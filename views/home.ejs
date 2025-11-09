@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f4f6;
+        color: #333;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 20px;
+      }
+
+      form {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      form label {
+        font-weight: bold;
+        color: #555;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      form input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      form button {
+        display: block;
+        width: 100%;
+        background-color: #2c3e50;
+        color: #ffffff;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      form button:hover {
+        background-color: #34495e;
+      }
+
+      .generated-url {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 18px;
+        color: #27ae60;
+      }
+
+      .generated-url a {
+        text-decoration: none;
+        color: #2c3e50;
+        font-weight: bold;
+      }
+
+      .table-container {
+        max-width: 900px;
+        margin: 30px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      table th,
+      table td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+
+      table th {
+        background-color: #2c3e50;
+        color: #ffffff;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      table tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      .no-urls {
+        text-align: center;
+        color: #999;
+        font-size: 18px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        form {
+          padding: 15px;
+        }
+
+        .table-container {
+          padding: 15px;
+        }
+
+        table th,
+        table td {
+          font-size: 14px;
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>URL Shortener</h1>
+    <form action="/url" method="POST">
+      <label for="url">Enter the URL:</label>
+      <input
+        type="text"
+        name="url"
+        placeholder="https://www.example.com"
+        required
+      />
+      <button type="submit">Generate Short URL</button>
+    </form>
+
+    <div class="generated-url">
+      <% if (locals.id) { %>
+      <p>
+        URL Generated:
+        <a href="http://localhost:8000/<%= id %>"
+          >http://localhost:8000/<%= id %></a
+        >
+      </p>
+      <% } %>
+    </div>
+
+    <div class="table-container">
+      <% if (locals.urls) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Sr. No</th>
+            <th>URL</th>
+            <th>Short ID</th>
+            <th>Clicks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% urls.forEach((url, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td>
+              <a href="<%= url.redirectURL %>" target="_blank"
+                ><%= url.redirectURL %></a
+              >
+            </td>
+            <td><%= url.shortId %></td>
+            <td><%= url.visitHistory.length %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } else { %>
+      <p class="no-urls">No URLs have been generated yet.</p>
+      <% } %>
+    </div>
+  </body>
+</html>
